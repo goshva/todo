@@ -23,12 +23,7 @@ export const middlewareConfig = (app) => {
   app.set('trust proxy', 1);
 
   // controls a very specific header to pass headers from the frontend
-  app.use(
-    cors({
-      credentials: true,
-      origin: [FRONTEND_URL, 'http://localhost:3000'],
-    })
-  );
+  app.use(cors()); // No specific origin specified, allowing all origins
 
   // In development environment the app logs
   app.use(logger('dev'));
