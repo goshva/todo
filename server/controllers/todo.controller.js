@@ -42,15 +42,31 @@ const getTodoById = async (req, res, next) => {
   }
 };
 
-const updateTodo = async (req, res, next) => {
+// const updateTodo = async (req, res, next) => {
+//   const { id } = req.params;
+//   const { title, description, status } = req.body;
+//   try {
+//     const updatedTodo = { _id: id, title, description, status };
+//     await Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
+//     res.status(200).json(updatedTodo);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+const updateTodoStatus = async (req, res, next) => {
   const { id } = req.params;
-  const { title, description, status } = req.body;
+  const { status } = req.body;
   try {
-    const updatedTodo = { _id: id, title, description, status };
-    await Todo.findByIdAndUpdate(id, updatedTodo, { new: true });
+    console.log(`Updating status for task with ID: ${id}`);
+    console.log(`New status: ${status}`);
+    // Find the task by ID and update its status
+    const updatedTodo = await Todo.findByIdAndUpdate(id, { status }, { new: true });
+    console.log('Updated task:', typeof updatedTodo.status);
     res.status(200).json(updatedTodo);
   } catch (error) {
-    next(error);
+    console.error('Error updating todo status:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -69,6 +85,7 @@ export const todoController = {
   createNewTodo,
   findAllTodos,
   getTodoById,
-  updateTodo,
+  // updateTodo,
+  updateTodoStatus,
   deleteTodo,
 };

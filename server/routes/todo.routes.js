@@ -13,7 +13,10 @@ todoRoutes.get('/todos', todoController.findAllTodos);
 todoRoutes.get('/todos/:id', todoController.getTodoById);
 
 // PUT /api/todos/:id  -  Edit todo details
-todoRoutes.put('/todos/:id', todoController.updateTodo);
+// todoRoutes.put('/todos/:id', todoController.updateTodo);
+
+// PUT /api/todos/:id  -  Update todo status
+todoRoutes.put('/todos/:id', todoController.updateTodoStatus);
 
 // DELETE /api/todos/:id  -  Delete todo
 todoRoutes.delete('/todos/:id', todoController.deleteTodo);
